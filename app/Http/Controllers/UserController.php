@@ -44,6 +44,7 @@ class UserController extends Controller
         public function send()
         {
             $random=1111;
+            
             Mail::to("gonegamer11@gmail.com")->send(new MailFaris($random));
             return response()->json([
                 'code'=>200,

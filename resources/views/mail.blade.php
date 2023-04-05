@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>Verification code   {{ $random }}</h1>
+    
 </body>
 </html>
