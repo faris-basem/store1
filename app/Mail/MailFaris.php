@@ -31,8 +31,8 @@ class MailFaris extends Mailable
     public function build()
     {
         return $this->view('mail')
-        
+
                     ->subject('verify')
-                    ->from('farisstore@gmail.com');
+                    ->from('farisstore@gmail.com','Faris Store');
     }
 }

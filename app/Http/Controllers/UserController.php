@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    public function regester(Request $request)
+    public function login(Request $request)
     {
         
         $usere = User::where('email',$request->email)->first();
@@ -43,8 +43,8 @@ class UserController extends Controller
     }
         public function send()
         {
-            $random=1111;
-            
+            $random=rand(1000, 9999);
+
             Mail::to("gonegamer11@gmail.com")->send(new MailFaris($random));
             return response()->json([
                 'code'=>200,
