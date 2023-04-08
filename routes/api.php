@@ -22,7 +22,8 @@ Route::post('game_by_id','App\Http\Controllers\GameController@game_by_id');
 
 Route::get('mail','App\Http\Controllers\UserController@send');
 
-
+Route::post('login','App\Http\Controllers\UserController@login');
+Route::post('verify','App\Http\Controllers\UserController@verify');
 
 
 
