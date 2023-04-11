@@ -22,6 +22,10 @@ class UserController extends Controller
                 // $usere->phone_code=$ran;
                  $usere->save();
                 //code sent
+                return response()->json([
+                    'code'=>200,
+                    'message'=>'Phone and Email',
+                ]);
     
             }
             $userp = User::where('phone',$request->phone)->first();
@@ -30,12 +34,20 @@ class UserController extends Controller
             // $usere->phone_code=$ran;
             // $usere->save();
             //code sent
+            return response()->json([
+                'code'=>200,
+                'message'=>'Phone Login',
+            ]);
         }else{
             $user=new User();
             $user->phone =  $request->phone;
             // $user->name = $request-> name;
             $user->save();
             //send code
+            return response()->json([
+                'code'=>200,
+                'message'=>'Phone Register',
+            ]);
         }
         }elseif(isset($request->email)){
             $usere = User::where('email',$request->email)->first();
@@ -48,6 +60,10 @@ class UserController extends Controller
     
             $s=$request->email;
             Mail::to ($s)->send(new MailFaris($ran));
+            return response()->json([
+                'code'=>200,
+                'message'=>'Email Login',
+            ]);
             
             }else{
                 $random=rand(1000, 9999);
@@ -58,6 +74,10 @@ class UserController extends Controller
                 $user->save();
                 $s=$request->email;
             Mail::to ($s)->send(new MailFaris($random));
+            return response()->json([
+                'code'=>200,
+                'message'=>'Email Register',
+            ]);
             }
         }        
     }
@@ -66,7 +86,12 @@ class UserController extends Controller
         if (isset($request->phone_code)){
             $user=User::where('phone',$request->phone)->first();
             if($user->phone_code==$request->phone_code){
-                return true;
+                $user['token'] = $user->createToken('accessToken')->accessToken;
+                return response()->json([
+                    'code'=>200,
+                    'message'=>'Phone Verify',
+                    'data'=>$user
+                ]);
             }
             else{
                 return response()->json([
