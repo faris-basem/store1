@@ -33,6 +33,8 @@ Route::post('add_cart','App\Http\Controllers\UserController@add_to_cart');
 
 Route::post('packages','App\Http\Controllers\GameController@packages');
 
+Route::post('search','App\Http\Controllers\GameController@search');
+
 Route::get('mail','App\Http\Controllers\UserController@send');
 
 Route::post('login','App\Http\Controllers\UserController@login');

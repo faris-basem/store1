@@ -54,4 +54,22 @@ class GameController extends Controller
             'country'=>$country
         ]);
     }
+
+
+    public function search(Request $request)
+    {
+        $search=Game::where('name','like','%'.$request->name.'%')->get();
+        if($search->count()>0){
+            return response()->json([
+                'code'=>200,
+                'message'=>'fetch data successfully',
+                'data'=>$search
+                ]);
+        }else{
+            return response()->json([
+                'code'=>404,
+                'message'=>'no data found'
+                ]);
+        }
+    }
 }
