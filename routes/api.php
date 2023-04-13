@@ -35,6 +35,8 @@ Route::post('packages','App\Http\Controllers\GameController@packages');
 
 Route::post('search','App\Http\Controllers\GameController@search');
 
+Route::post('profilepicture','App\Http\Controllers\UserController@profile_picture');
+
 Route::get('mail','App\Http\Controllers\UserController@send');
 
 Route::post('login','App\Http\Controllers\UserController@login');

@@ -193,6 +193,26 @@ class UserController extends Controller
             'message'=>'game added to cart',
         ]);
     }
+    public function profile_picture(Request $request)
+    {
+        if(!$request->hasFile('file')){
+            return response()->json([
+                'code'=>404,
+                'message'=>'no file uploaded'
+                ]);
+        }
+        $file=$request->file('file');
+        $filename=$file->getClientOriginalName();
+        $path=$file->store('apiDocs');
+        $pp=User::where('id',Auth::guard('api')->user()->id)->first();
+        $pp->photo=$path;
+        $pp->save();
+        return response()->json([
+            'code'=>200,
+            'message'=>'photo uploaded',
+            'data'=>$pp,$filename
+        ]);
+    }
 
         // public function send()
         // {
