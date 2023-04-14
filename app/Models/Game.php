@@ -11,4 +11,17 @@ class Game extends Model
     protected $table = 'games';
     protected $guarded = [];
     public $timestamps=false;
+
+
+
+    protected $appends = ['GameCountry','Review'];
+    
+    function getGameCountryAttribute(){
+        $Game_country = GameCountry::where('game_id',$this->id)->get();
+        return $Game_country;
+    }
+    function getReviewAttribute(){
+        $Game_country = Review::where('game_id',$this->id)->get();
+        return $Game_country;
+    }
 }

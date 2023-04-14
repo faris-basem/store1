@@ -39,6 +39,8 @@ Route::post('profilepicture','App\Http\Controllers\UserController@profile_pictur
 
 Route::get('mail','App\Http\Controllers\UserController@send');
 
+Route::get('all_currencies','App\Http\Controllers\CurrencyController@all_currencies');
+
 Route::post('login','App\Http\Controllers\UserController@login');
 Route::post('verify','App\Http\Controllers\UserController@verify');
 
