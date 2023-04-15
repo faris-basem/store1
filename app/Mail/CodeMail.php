@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MailFaris extends Mailable
+class CodeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,11 +16,10 @@ class MailFaris extends Mailable
      *
      * @return void
      */
-
-     public $random;
-    public function __construct($random)
+    public $code=[];
+    public function __construct($code)
     {
-        $this->random=$random;
+        $this->code=$code;
     }
 
     /**
@@ -30,8 +29,8 @@ class MailFaris extends Mailable
      */
     public function build()
     {
-        return $this->view('mail')
-                    ->subject('verify')
+        return $this->view('codemail')
+                    ->subject('code')
                     ->from('farisstore@gmail.com','Faris Store');
     }
 }

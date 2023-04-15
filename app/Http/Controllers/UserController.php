@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Mail\MailFaris;
 use App\Models\Cart;
-use App\Models\Favourite;
 use App\Models\Game;
+use App\Models\User;
+use App\Mail\CodeMail;
+use App\Models\Coupon;
+use App\Mail\MailFaris;
+use App\Models\Favourite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -213,6 +215,23 @@ class UserController extends Controller
             'data'=>$pp,$filename
         ]);
     }
+    public function buy_code(Request $request)
+    {
+        $n=$request->num;
+        for($i=0;$i<$n;$i++){
+        $code=Coupon::where('sold',0)->where('game_id',$request->game_id)->where('package_id',$request->package_id)->first();
+        $code->sold=1;
+        $code->user_id=Auth::guard('api')->user()->id;
+        $code->save();
+        
+        Mail::to (Auth::guard('api')->user()->email)->send(new CodeMail($code->code));
+    }
+        return response()->json([
+            'code'=>200,
+            'message'=>'sent successfully',
+        ]);
+    }
+
 
         // public function send()
         // {

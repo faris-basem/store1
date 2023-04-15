@@ -45,4 +45,9 @@ Route::post('login','App\Http\Controllers\UserController@login');
 Route::post('verify','App\Http\Controllers\UserController@verify');
 
 
+Route::post('generate','App\Http\Controllers\CouponController@generate');
+
+Route::post('buy_code','App\Http\Controllers\UserController@buy_code');
+
+
 
